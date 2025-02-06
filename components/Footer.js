@@ -12,9 +12,9 @@ export default Footer;
 
 const styles = StyleSheet.create({
     footer: {
-        flex: 0.2,
+        flex: 0.1,
         width: "100%",
-        backgroundColor: styleColors.primaryColor,
+        backgroundColor: styleColors.secondaryColor,
         bottom: 0,
     },
 });
