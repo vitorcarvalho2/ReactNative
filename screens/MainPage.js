@@ -5,16 +5,12 @@ import ContactList from "../components/ContactList";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-function MainPage(navigation) {
+function MainPage({navigation}) {
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <Header />
-      {/* AppBar */}
+      <Header navigation={navigation}/>
       <AppBar />
-      {/* Body */}
       <ContactList />
-      {/* Footer */}
       <Footer />
     </View>
   );
