@@ -14,7 +14,6 @@ function AddContact() {
     setPhone(phone);
   }
   function SaveHandler() {
-    name = name;
     //props.phone(phone);
     console.log("Salvo");
   }
