@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+
+import { StyleSheet, Text, View, Dimensions, Pressable } from 'react-native';
 import styleColors from '../assets/static/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 function Header({navigation}) {
     const deviceWidth = Dimensions.get('window').width;
     const styles = deviceWidth >= 800 ? styleLG : styleSM;
-
+  
     return (
         <View style={styles.header}>
             <Icon 

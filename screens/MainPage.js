@@ -18,7 +18,6 @@ function MainPage({navigation}) {
 
 export default MainPage;
 
-
 const styles = StyleSheet.create({
   container: {
     width: "100%",
