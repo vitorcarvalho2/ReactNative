@@ -1,5 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 
+
+import Header from "./components/Header";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -21,7 +23,7 @@ export default function App() {
           },
         }}
         >
-          <Stack.Screen name="MainPage" component={MainPage} options={{ headerTitle: "" }} />
+          <Stack.Screen name="MainPage" component={MainPage} options={{ headerShown: false }} />
           <Stack.Screen name="AddContact" component={AddContact} options={{ headerTitle: "Adicionar" }}/>
         </Stack.Navigator>
       </NavigationContainer>
