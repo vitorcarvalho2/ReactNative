@@ -43,7 +43,7 @@ function AddContact({ navigation }) {
 			  color={styleColors.primaryColor} 
 			  />
         	<TextInput
-        	  maxLength={18}
+        	  maxLength={16}
         	  onChangeText={(text) => setName(text)}
         	  value={name}
         	  placeholder="Digite o nome"
