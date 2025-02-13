@@ -10,7 +10,7 @@ function MainPage({navigation}) {
     <View style={styles.container}>
       <Header navigation={navigation} />
       <AppBar />
-      <ContactList />
+      <ContactList navigation={navigation}/>
       <Footer />
     </View>
   );

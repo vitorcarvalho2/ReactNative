@@ -5,7 +5,7 @@ import styleColors from '../assets/static/colors';
 
 import { ContactContext } from '../store/context/contacts-context';
 
-function ContactList() {
+function ContactList({navigation}) {
     const contactsContext = useContext(ContactContext);
     const deviceWidth = Dimensions.get('window').width;
     const styles = deviceWidth >= 800 ? styleLG : styleSM;
@@ -32,7 +32,8 @@ function ContactList() {
                         <Icon 
                             name="pencil-sharp" 
                             size={deviceWidth >= 800 ? 45 : 30} 
-                            color={styleColors.primaryColor} 
+                            color={styleColors.primaryColor}
+                            onPress={() => navigation.navigate('EditContact', {id: item.id})} 
                         />
                     </View>
                 )}
