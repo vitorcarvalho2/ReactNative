@@ -14,21 +14,29 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
-      <ContactsContextProvider>
-          <NavigationContainer>
-            <Stack.Navigator
-            screenOptions={{
-              headerStyle: {
-                backgroundColor: styleColors.secondaryColor,
-              },
-            }}
-            >
-              <Stack.Screen name="MainPage" component={MainPage} options={{ headerShown: false }} />
-              <Stack.Screen name="AddContact" component={AddContact} options={{ headerTitle: "Adicionar" }}/>
-            </Stack.Navigator>
-          </NavigationContainer>
-      </ContactsContextProvider>
+      	<StatusBar style="dark" />
+    	<ContactsContextProvider>
+      		<NavigationContainer>
+      		    <Stack.Navigator
+      		    	screenOptions={{
+      		    		headerStyle: {
+      		        		backgroundColor: styleColors.secondaryColor,
+      		        	},
+      		      	}}
+      		    >
+            		<Stack.Screen 
+              			name="MainPage" 
+						component={MainPage} 
+						options={{ headerShown: false }} 
+					/>
+              		<Stack.Screen 
+						name="AddContact" 
+						component={AddContact} 
+						options={{ headerTitle: "Adicionar" }}
+					/>
+            	</Stack.Navigator>
+        	</NavigationContainer>
+    	</ContactsContextProvider>
     </>
   );
 }

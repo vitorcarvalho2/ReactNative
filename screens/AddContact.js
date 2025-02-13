@@ -8,8 +8,8 @@ import { ContactContext } from "../store/context/contacts-context";
 function AddContact() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-
   const contactsContext = useContext(ContactContext);
+
 
   function NameHandler(name) {
     setName(name);
@@ -46,14 +46,14 @@ function AddContact() {
       />
       <View style={styles.inputContainer}>
         <TextInput
+          onChangeText={NameHandler}
           value={name}
           placeholder="Digite o nome"
           style={styles.input}
-          onChangeText={NameHandler}
         ></TextInput>
         <TextInput
-          value={phone}
           onChangeText={PhoneHandler}
+          value={phone}
           placeholder="Digite o telefone"
           style={styles.input}
         ></TextInput>
