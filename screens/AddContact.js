@@ -1,21 +1,39 @@
 import { View, StyleSheet, Button, TextInput } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styleColors from "../assets/static/colors";
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { ContactContext } from "../store/context/contacts-context";
 
 function AddContact() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const contactsContext = useContext(ContactContext);
+
 
   function NameHandler(name) {
     setName(name);
   }
+
   function PhoneHandler(phone) {
     setPhone(phone);
   }
+
   function SaveHandler() {
-    //props.phone(phone);
-    console.log("Salvo");
+    if (!name || !phone) {
+      return;
+    } 
+
+    contactsContext.addContact({
+      name: name,
+      phone: phone,
+      id: contactsContext.contacts.length + 1,
+    });
+
+    setName("");
+    setPhone("");
+
+
   }
 
   return (
@@ -28,12 +46,14 @@ function AddContact() {
       />
       <View style={styles.inputContainer}>
         <TextInput
+          onChangeText={NameHandler}
+          value={name}
           placeholder="Digite o nome"
           style={styles.input}
-          onChangeText={NameHandler}
         ></TextInput>
         <TextInput
           onChangeText={PhoneHandler}
+          value={phone}
           placeholder="Digite o telefone"
           style={styles.input}
         ></TextInput>
