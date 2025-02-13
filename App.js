@@ -6,8 +6,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import styleColors from "./assets/static/colors";
-import AddContact from "./screens/AddContact";
 import MainPage from "./screens/MainPage";
+import AddContact from "./screens/AddContact";
+import EditContact from "./screens/EditContact";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,12 @@ export default function App() {
 						component={AddContact} 
 						options={{ headerTitle: "Adicionar" }}
 					/>
+					<Stack.Screen 
+						name="EditContact" 
+						component={EditContact} 
+						options={{ headerTitle: "Editar contato" }}
+					/>
+					
             	</Stack.Navigator>
         	</NavigationContainer>
     	</ContactsContextProvider>

@@ -2,36 +2,33 @@ import { View, StyleSheet, Button, TextInput } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styleColors from "../assets/static/colors";
 import { useState, useContext } from "react";
+import { useRoute } from "@react-navigation/native";
 
 import { ContactContext } from "../store/context/contacts-context";
 
-function AddContact({ navigation }) {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const contactsContext = useContext(ContactContext);
+function EditContact({navigation}) {
+    const route = useRoute();
+    const contactsContext = useContext(ContactContext);
+    const contactData = contactsContext.contacts.find((contact) => contact.id === route.params.id);
 
+    const [name, setName] = useState(contactData ? contactData.name : "");
+    const [phone, setPhone] = useState(contactData ? contactData.phone : "");
 
-  function NameHandler(name) {
-    setName(name);
-  }
-
-  function PhoneHandler(phone) {
-    setPhone(phone);
-  }
 
   function SaveHandler() {
     if (!name || !phone) {
       return;
     } 
 
-    contactsContext.addContact({
-      name: name,
-      phone: phone,
-      id: Math.random().toString() + name,
+    contactsContext.editContact({
+        name: name,
+        phone: phone,
+        id: route.params.id,
     });
 
     navigation.navigate('MainPage');
   }
+
 
   return (
     <View style={styles.container}>
@@ -43,15 +40,15 @@ function AddContact({ navigation }) {
       />
       <View style={styles.inputContainer}>
         <TextInput
-          onChangeText={NameHandler}
+          onChangeText={(text) => setName(text)}
           value={name}
-          placeholder="Digite o nome"
+          placeholder=""
           style={styles.input}
         ></TextInput>
         <TextInput
-          onChangeText={PhoneHandler}
+          onChangeText={(text) => setPhone(text)}
           value={phone}
-          placeholder="Digite o telefone"
+          placeholder=""
           style={styles.input}
         ></TextInput>
       </View>
@@ -60,7 +57,7 @@ function AddContact({ navigation }) {
   );
 }
 
-export default AddContact;
+export default EditContact;
 
 const styles = StyleSheet.create({
   container: {
