@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
+import ContactsContextProvider from "./store/context/contacts-context";
 
 
-import Header from "./components/Header";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -15,18 +15,20 @@ export default function App() {
   return (
     <>
       <StatusBar style="dark" />
-      <NavigationContainer>
-        <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: styleColors.secondaryColor,
-          },
-        }}
-        >
-          <Stack.Screen name="MainPage" component={MainPage} options={{ headerShown: false }} />
-          <Stack.Screen name="AddContact" component={AddContact} options={{ headerTitle: "Adicionar" }}/>
-        </Stack.Navigator>
-      </NavigationContainer>
+      <ContactsContextProvider>
+          <NavigationContainer>
+            <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: styleColors.secondaryColor,
+              },
+            }}
+            >
+              <Stack.Screen name="MainPage" component={MainPage} options={{ headerShown: false }} />
+              <Stack.Screen name="AddContact" component={AddContact} options={{ headerTitle: "Adicionar" }}/>
+            </Stack.Navigator>
+          </NavigationContainer>
+      </ContactsContextProvider>
     </>
   );
 }

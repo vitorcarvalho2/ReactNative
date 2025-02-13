@@ -1,31 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styleColors from '../assets/static/colors';
 
-function ContactList() {
-    const mockContacts = [
-        { name: 'Fulano', id: '1' },
-        { name: 'Ciclano', id: '2' },
-        { name: 'Beltrano', id: '3' },
-        { name: 'Pai do Fulano', id: '4' },
-        { name: 'Pai do Ciclano', id: '5' },
-        { name: 'Pai do Beltrano', id: '6' },
-        { name: 'Mãe do Fulano', id: '7' },
-        { name: 'Mãe do Ciclano', id: '8' },
-        { name: 'Mãe do Beltrano', id: '9' },
-        { name: 'Irmão do Fulano', id: '10' },
-        { name: 'Irmão do Ciclano', id: '11' },
-        { name: 'Irmão do Beltrano', id: '12' },
-        { name: 'Primo do Fulano', id: '13' },
-        { name: 'Primo do Ciclano', id: '14' },
-        { name: 'Primo do Beltrano', id: '15' },
-        { name: 'Vô do Fulano', id: '22' },
-        { name: 'Vô do Ciclano', id: '23' },
-        { name: 'Vô do Beltrano', id: '24' },
-      ];
-    const [contacts, setContacts] = useState([...mockContacts]);
+import { ContactContext } from '../store/context/contacts-context';
 
+function ContactList() {
+    const contactsContext = useContext(ContactContext);
     const deviceWidth = Dimensions.get('window').width;
     const styles = deviceWidth >= 800 ? styleLG : styleSM;
 
@@ -34,7 +15,7 @@ function ContactList() {
             <FlatList
                 style={styles.contactList}
                 contentContainerStyle={{alignItems: 'start'}}
-                data={contacts}
+                data={contactsContext.contacts}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <View style={styles.contactCard}>
@@ -101,7 +82,7 @@ const styleSM = StyleSheet.create({
     },
     infoText: {
         color: styleColors.textColor,
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: 'Bold',
         marginLeft: 10,
     },
