@@ -1,24 +1,16 @@
 import { createContext, useState } from 'react';
 
 const mockContacts = [
-    { name: 'Fulano', id: '1' },
-    { name: 'Ciclano', id: '2' },
-    { name: 'Beltrano', id: '3' },
-    { name: 'Pai do Fulano', id: '4' },
-    { name: 'Pai do Ciclano', id: '5' },
-    { name: 'Pai do Beltrano', id: '6' },
-    { name: 'Mãe do Fulano', id: '7' },
-    { name: 'Mãe do Ciclano', id: '8' },
-    { name: 'Mãe do Beltrano', id: '9' },
-    { name: 'Irmão do Fulano', id: '10' },
-    { name: 'Irmão do Ciclano', id: '11' },
-    { name: 'Irmão do Beltrano', id: '12' },
-    { name: 'Primo do Fulano', id: '13' },
-    { name: 'Primo do Ciclano', id: '14' },
-    { name: 'Primo do Beltrano', id: '15' },
-    { name: 'Vô do Fulano', id: '22' },
-    { name: 'Vô do Ciclano', id: '23' },
-    { name: 'Vô do Beltrano', id: '24' },
+    { name: 'Fulano', phone: "11111111", id: 1 },
+    { name: 'Ciclano', phone: "22222222", id: 2 },
+    { name: 'Beltrano', phone: "33333333", id: 3 },
+    { name: 'João', phone: "44444444", id: 4 },
+    { name: 'Maria', phone: "55555555", id: 5 },
+    { name: 'José', phone: "66666666", id: 6 },
+    { name: 'Pedro', phone: "77777777", id: 7 },
+    { name: 'Paulo', phone: "88888888", id: 8 },
+    { name: 'Lucas', phone: "99999999", id: 9 },
+    { name: 'Mateus', phone: "00000000", id: 10 },
   ];
 
 export const ContactContext = createContext({
