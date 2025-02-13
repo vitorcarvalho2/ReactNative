@@ -8,7 +8,6 @@ import Header from "../components/Header";
 function MainPage({navigation}) {
   return (
     <View style={styles.container}>
-      <Header navigation={navigation} />
       <AppBar />
       <ContactList navigation={navigation}/>
       <Footer />
