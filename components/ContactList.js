@@ -7,6 +7,7 @@ import { ContactContext } from '../store/context/contacts-context';
 
 function ContactList({navigation}) {
     const contactsContext = useContext(ContactContext);
+    
     const deviceWidth = Dimensions.get('window').width;
     const styles = deviceWidth >= 800 ? styleLG : styleSM;
 
