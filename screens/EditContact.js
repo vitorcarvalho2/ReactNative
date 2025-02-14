@@ -65,6 +65,7 @@ function EditContact({navigation}) {
                       maxLength={13}
                       onChangeText={(text) => setCellphone(text)}
                       value={cellphone}
+                      keyboardType="phone-pad"
                       placeholder="Digite o celular"
                       style={styles.input}
                     ></TextInput>
@@ -80,6 +81,7 @@ function EditContact({navigation}) {
                       onChangeText={(text) => setPhone(text)}
                       value={phone}
                       placeholder="Digite o telefone"
+                      keyboardType="phone-pad"
                       style={styles.input}
                     ></TextInput>
                 </View>
