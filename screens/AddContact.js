@@ -21,6 +21,8 @@ function AddContact({ navigation }) {
     contactsContext.addContact({
       name: name,
       phone: phone,
+      cellphone: cellphone,
+      email: email,
       id: Math.random().toString() + name,
     });
 
