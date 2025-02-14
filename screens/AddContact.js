@@ -10,13 +10,13 @@ function AddContact({ navigation }) {
   const [phone, setPhone] = useState("");
   const [cellphone, setCellphone] = useState("");
   const [email, setEmail] = useState("");
-  
+
   const contactsContext = useContext(ContactContext);
 
   function SaveHandler() {
     if (!name || !phone) {
       return;
-    } 
+    }
 
     contactsContext.addContact({
       name: name,
@@ -24,7 +24,7 @@ function AddContact({ navigation }) {
       id: Math.random().toString() + name,
     });
 
-    navigation.navigate('MainPage');
+    navigation.navigate("MainPage");
   }
 
   return (
@@ -36,62 +36,64 @@ function AddContact({ navigation }) {
         marginTop={30}
       />
       <View style={styles.formContainer}>
-		<View style={styles.inputContainer}>
-			<Icon 
-			  name="person-outline" 
-			  size={42} 
-			  color={styleColors.primaryColor} 
-			  />
-        	<TextInput
-        	  maxLength={16}
-        	  onChangeText={(text) => setName(text)}
-        	  value={name}
-        	  placeholder="Digite o nome"
-        	  style={styles.input}
-			></TextInput>
-		</View>
-		<View style={styles.inputContainer}>
-			<Icon 
-			  name="phone-portrait-outline" 
-			  size={40} 
-			  color={styleColors.primaryColor} 
-			  />
-        	<TextInput
-        	  maxLength={13}
-        	  onChangeText={(text) => setCellphone(text)}
-        	  value={cellphone}
-        	  placeholder="Digite o celular"
-        	  style={styles.input}
-			></TextInput>
-		</View>
-		<View style={styles.inputContainer}>
-			<Icon 
-			  name="call-outline" 
-			  size={40} 
-			  color={styleColors.primaryColor} 
-			  />
-        	<TextInput
-        	  maxLength={13}
-        	  onChangeText={(text) => setPhone(text)}
-        	  value={phone}
-        	  placeholder="Digite o telefone"
-        	  style={styles.input}
-			></TextInput>
-		</View>
-		<View style={styles.inputContainer}>
-			<Icon 
-			  name="mail-outline" 
-			  size={40} 
-			  color={styleColors.primaryColor} 
-			  />
-        	<TextInput
-        	  maxLength={50}
-        	  onChangeText={(text) => setEmail(text)}
-        	  value={email}
-        	  placeholder="Digite o email"
-        	  style={styles.input}
-			></TextInput>
-		</View>						 
+        <View style={styles.inputContainer}>
+          <Icon
+            name="person-outline"
+            size={42}
+            color={styleColors.primaryColor}
+          />
+          <TextInput
+            maxLength={16}
+            onChangeText={(text) => setName(text)}
+            value={name}
+            placeholder="Digite o nome"
+            style={styles.input}
+          ></TextInput>
+        </View>
+        <View style={styles.inputContainer}>
+          <Icon
+            name="phone-portrait-outline"
+            size={40}
+            color={styleColors.primaryColor}
+          />
+          <TextInput
+            maxLength={13}
+            onChangeText={(text) => setCellphone(text)}
+            value={cellphone}
+            placeholder="Digite o celular"
+            keyboardType="phone-pad"
+            style={styles.input}
+          ></TextInput>
+        </View>
+        <View style={styles.inputContainer}>
+          <Icon
+            name="call-outline"
+            size={40}
+            color={styleColors.primaryColor}
+          />
+          <TextInput
+            maxLength={13}
+            onChangeText={(text) => setPhone(text)}
+            value={phone}
+            keyboardType="phone-pad"
+            placeholder="Digite o telefone"
+            style={styles.input}
+          ></TextInput>
+        </View>
+        <View style={styles.inputContainer}>
+          <Icon
+            name="mail-outline"
+            size={40}
+            color={styleColors.primaryColor}
+          />
+          <TextInput
+            maxLength={50}
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+            placeholder="Digite o email"
+            style={styles.input}
+          ></TextInput>
+        </View>
       </View>
       <Button title="Salvar" onPress={SaveHandler} />
     </View>
@@ -124,9 +126,9 @@ const styles = StyleSheet.create({
     marginVertical: 50,
   },
   inputContainer: {
-	display: "flex",
-	flexDirection: "row",
-	width: "85%",
-	alignItems: "center",
-  }
+    display: "flex",
+    flexDirection: "row",
+    width: "85%",
+    alignItems: "center",
+  },
 });
