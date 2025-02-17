@@ -1,16 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import ContactsContextProvider from "./store/context/contacts-context";
 import Icon from "react-native-vector-icons/Ionicons";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import styleColors from "./assets/static/colors";
 import { stylesHeaderText } from "./assets/static/styles";
 
-import MainPage from "./screens/MainPage";
-import AddContact from "./screens/AddContact";
-import EditContact from "./screens/EditContact";
+
+import MainPage from "./screens/MainPage/MainPage";
+import AddContact from "./screens/AddContact/AddContact";
+import EditContact from "./screens/EditContact/EditContact";
 
 const Stack = createNativeStackNavigator();
 
