@@ -1,9 +1,8 @@
 import { View, StyleSheet } from "react-native";
 
-import AppBar from "../components/AppBar";
-import ContactList from "../components/ContactList";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import AppBar from "./components/AppBar";
+import ContactList from "./components/ContactList";
+import Footer from "./components/Footer";
 
 function MainPage({navigation}) {
   return (

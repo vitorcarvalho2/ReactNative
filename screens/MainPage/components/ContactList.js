@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import styleColors from '../assets/static/colors';
+import styleColors from '../../../assets/static/colors';
 
-import { ContactContext } from '../store/context/contacts-context';
+import { ContactContext } from '../../../store/context/contacts-context';
 
 function ContactList({navigation}) {
     const contactsContext = useContext(ContactContext);
