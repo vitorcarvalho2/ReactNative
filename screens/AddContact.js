@@ -1,4 +1,4 @@
-import { View, StyleSheet, Button, TextInput } from "react-native";
+import { View, StyleSheet, Button, TextInput, Alert } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styleColors from "../assets/static/colors";
 import { useState, useContext } from "react";
@@ -14,13 +14,16 @@ function AddContact({ navigation }) {
   const contactsContext = useContext(ContactContext);
 
   function SaveHandler() {
-    if (!name || !phone) {
+    if (!name || !phone || !cellphone || !email) {
+      Alert.alert("Erro", "Preencha todos os campos");
       return;
     }
 
     contactsContext.addContact({
       name: name,
       phone: phone,
+      cellphone: cellphone,
+      email: email,
       id: Math.random().toString() + name,
     });
 
