@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Dimensions } from "react-native";
-import styleColors from '../assets/static/colors';
+import styleColors from '../../../assets/static/colors';
 
 function AppBar() {
   const deviceWidth = Dimensions.get('window').width;

@@ -1,10 +1,10 @@
 import { View, StyleSheet, Button, TextInput, Alert } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import styleColors from "../assets/static/colors";
+import styleColors from "../../assets/static/colors";
 import { useState, useContext } from "react";
 import { useRoute } from "@react-navigation/native";
 
-import { ContactContext } from "../store/context/contacts-context";
+import { ContactContext } from "../../store/context/contacts-context";
 
 function EditContact({navigation}) {
     const route = useRoute();

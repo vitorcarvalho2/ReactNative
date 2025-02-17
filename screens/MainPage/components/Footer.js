@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 
-import styleColors from '../assets/static/colors';
+import styleColors from '../../../assets/static/colors';
 
 function Footer() {
   return (

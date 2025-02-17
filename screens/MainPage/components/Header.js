@@ -1,6 +1,6 @@
 
 import { StyleSheet, Text, View, Dimensions, Pressable } from 'react-native';
-import styleColors from '../assets/static/colors';
+import styleColors from '../../../assets/static/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 function Header({navigation}) {
