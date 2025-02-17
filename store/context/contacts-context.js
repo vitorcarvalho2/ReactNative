@@ -1,14 +1,10 @@
 import { createContext, useState, useReducer } from 'react';
 
 const mockContacts = [
-    { name: 'Fulano', phone: "40028922", id: "1" },
-    { name: 'Ciclano', phone: "123456789", id: "2" },
-    { name: 'Beltrano', phone: "987654321", id: "3" },
-    { name: 'Deltrano', phone: "944445555", id: "4" },
-    { name: 'João', phone: "944445555", id: "5" },
-    { name: 'José', phone: "933335255", id: "6" },
-    { name: 'Maria', phone: "974324521", id: "7" },
-    { name: 'Pedro', phone: "932254222", id: "8" },
+    { name: 'Fulano', cellphone: "40028922", phone: "40028922", email: "fulano@gmail.com", id: "1" },
+    { name: 'Ciclano', cellphone: "123456789", phone: "123456789", email: "ciclano@gmail.com", id: "2" },
+    { name: 'Beltrano', cellphone: "987654321", phone: "987654321", email: "beltrano@gmail.com", id: "3" },
+    { name: 'Deltrano', cellphone: "40028922", phone: "1140028922", email: "deltrano@gmail.com", id: "4" },
   ];
 
 export const ContactContext = createContext({
@@ -21,7 +17,7 @@ export const ContactContext = createContext({
 function contactsReducer(state, action) {
     switch (action.type) {
         case 'ADD':
-            return [...state, {...action.payload}];
+            return [...state, {...action.payload, id: Math.random().toString() + action.payload.name}];
         case 'EDIT':
             return state.map((contact) => {
                 if (contact.id === action.payload.id) {
@@ -41,13 +37,7 @@ function ContactsContextProvider({children}) {
     const [contacts, dispatch] = useReducer(contactsReducer, mockContacts);
 
     function addContact(contactData) {
-        dispatch({ 
-            type: 'ADD', 
-            payload: {
-                ...contactData,
-                id: Math.random().toString() + contactData.name
-            } 
-        });
+        dispatch({ type: 'ADD', payload: contactData });
     }
 
     function editContact(contactData, selectedId) {

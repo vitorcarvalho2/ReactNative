@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import Input from './Input';
 import { ContactContext } from '../../../store/context/contacts-context';
 
-function Form({navigation}) {
+function AddContactForm({navigation}) {
 	const contactCtx = useContext(ContactContext);
 
     const [fields, setFields] = useState({
@@ -71,7 +71,7 @@ function Form({navigation}) {
     )
 }
 
-export default Form;
+export default AddContactForm;
 
 const styles = StyleSheet.create({
   formContainer: {
