@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import Input from "./Input";
 import { ContactContext } from "../../../store/context/contacts-context";
 import { validateFields } from "../../../utils/validation";
-import { storeContact } from '../../../util/http';
+import { storeContact } from '../../../utils/http';
 
 function AddContactForm({ navigation }) {
   const contactCtx = useContext(ContactContext);
