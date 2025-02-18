@@ -4,6 +4,7 @@ import { useState, useContext } from "react";
 import Input from "./Input";
 import { ContactContext } from "../../../store/context/contacts-context";
 import { validateFields } from "../../../utils/validation";
+import { storeContact } from '../../../util/http';
 
 function AddContactForm({ navigation }) {
   const contactCtx = useContext(ContactContext);
@@ -22,15 +23,23 @@ function AddContactForm({ navigation }) {
     });
   }
 
-  function SaveHandler() {
+  async function SaveHandler() {
     const validationErrors = validateFields(fields);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-    contactCtx.addContact(fields);
+    
+		const response = await storeContact(fields);
 
-    navigation.navigate("MainPage");
+		if (response.status === 'OK') {
+			contactCtx.addContact({...fields, id: response.firebaseId});
+			navigation.navigate("MainPage");
+		} 
+		else {
+			Alert.alert("Erro ao salvar:", "Não foi possível se conectar ao servidor.");
+		}
+
   }
 
   return (
