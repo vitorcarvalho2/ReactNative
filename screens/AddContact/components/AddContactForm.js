@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 
 import Input from './Input';
 import { ContactContext } from '../../../store/context/contacts-context';
+import { storeContact } from '../../../util/http';
 
 function AddContactForm({navigation}) {
 	const contactCtx = useContext(ContactContext);
@@ -21,15 +22,22 @@ function AddContactForm({navigation}) {
       });
     }
 
-    function SaveHandler() {
-      	console.log(fields);
+    async function SaveHandler() {
     	if (!fields.name || !fields.phone || !fields.cellphone || !fields.email) {
     	  Alert.alert("Erro", "Preencha todos os campos");
     	  return;
     	}
-		contactCtx.addContact(fields);
 
-        navigation.navigate("MainPage");
+		const response = await storeContact(fields);
+
+		if (response.status === 'OK') {
+			contactCtx.addContact({...fields, id: response.firebaseId});
+			navigation.navigate("MainPage");
+		} 
+		else {
+			Alert.alert("Erro ao salvar:", "Não foi possível se conectar ao servidor.");
+		}
+
     }
 
     return(
