@@ -1,14 +1,12 @@
 import { createContext, useState, useReducer } from 'react';
+import { fetchContacts } from '../../utils/http';
 
-const mockContacts = [
-    { name: 'Fulano', cellphone: "40028922", phone: "40028922", email: "fulano@gmail.com", id: "1" },
-    { name: 'Ciclano', cellphone: "123456789", phone: "123456789", email: "ciclano@gmail.com", id: "2" },
-    { name: 'Beltrano', cellphone: "987654321", phone: "987654321", email: "beltrano@gmail.com", id: "3" },
-    { name: 'Deltrano', cellphone: "40028922", phone: "1140028922", email: "deltrano@gmail.com", id: "4" },
-  ];
+const contactsFromDB = fetchContacts();
+console.log(contactsFromDB);
 
 export const ContactContext = createContext({
     contacts: [],
+    setContacts: (contacts) => {},
     addContact: (contactData) => {},
     removeContact: (selectedId) => {},
     editContact: (contactData, selectedId) => {},
@@ -16,8 +14,10 @@ export const ContactContext = createContext({
 
 function contactsReducer(state, action) {
     switch (action.type) {
+        case 'SET':
+            return action.payload;
         case 'ADD':
-            return [...state, {...action.payload, id: Math.random().toString() + action.payload.name}];
+            return [...state, {...action.payload}];
         case 'EDIT':
             return state.map((contact) => {
                 if (contact.id === action.payload.id) {
@@ -25,8 +25,8 @@ function contactsReducer(state, action) {
                 }
                 return contact;
             });
-        //case 'DELETE':
-        //    return state.filter((contact) => contact.id !== action.payload);
+        case 'DELETE':
+            return state.filter((contact) => contact.id !== action.payload);
 
         default:
             return state
@@ -34,10 +34,14 @@ function contactsReducer(state, action) {
 }
 
 function ContactsContextProvider({children}) {
-    const [contacts, dispatch] = useReducer(contactsReducer, mockContacts);
+    const [contacts, dispatch] = useReducer(contactsReducer, []);
 
     function addContact(contactData) {
         dispatch({ type: 'ADD', payload: contactData });
+    }
+
+    function setContacts(contacts) {
+        dispatch({ type: 'SET', payload: contacts });
     }
 
     function editContact(contactData, selectedId) {
@@ -45,57 +49,19 @@ function ContactsContextProvider({children}) {
     }
 
     function deleteContact(selectedId) {
-        dispatch({ type: 'REMOVE', payload: selectedId });
+        dispatch({ type: 'DELETE', payload: selectedId });
     }
 
     const value = {
         contacts: contacts,
         addContact: addContact,
+        setContacts: setContacts,
         editContact: editContact,
         deleteContact: deleteContact,
     }
 
     return <ContactContext.Provider value={value}>{children}</ContactContext.Provider>;
 
-    //const [contacts, setContacts] = useState([...mockContacts]);
-//
-    //function addContact(newContact) {
-    //    setContacts((currentContacts) => [...currentContacts, newContact]);
-    //}
-//
-    //function removeContact(selectedContact) {
-    //    setContacts((currentContacts) => {
-    //        return currentContacts.filter((contact) => contact.id !== selectedContact.id);
-    //    });
-    //}
-//
-    //function editContact(newContactData) {
-    //    setContacts((currentContacts) => {
-    //        return currentContacts.map((contact) => {
-    //            if (contact.id === newContactData.id) {
-    //                return {
-    //                    name: newContactData.name,
-    //                    phone: newContactData.phone, 
-    //                    id: contact.id
-    //                };
-    //            }
-    //            return contact;
-    //        });
-    //    });
-    //}
-//
-    //const value = {
-    //    contacts: contacts,
-    //    addContact: addContact,
-    //    removeContact: removeContact,
-    //    editContact: editContact,
-    //}
-
-    //return (
-    //<ContactContext.Provider value={value}>
-    //    {children}
-    //</ContactContext.Provider>
-    //);
 }
 
 export default ContactsContextProvider;

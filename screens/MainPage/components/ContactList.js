@@ -1,11 +1,27 @@
-import { useContext } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+import { useContext, useEffect } from 'react';
+import { StyleSheet, Text, View, FlatList, Dimensions, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styleColors from '../../../assets/static/colors';
 
 import { ContactContext } from '../../../store/context/contacts-context';
+import { fetchContacts } from '../../../utils/http';
 
 function ContactList({navigation}) {
+    
+    useEffect(() => {
+        async function getContacts() {
+            try {
+                const contacts = await fetchContacts();
+                contactsContext.setContacts(contacts.data);
+            }
+            catch (error) {
+                Alert.alert("Erro ao carregar contatos:", "Não foi possível se conectar ao servidor.");
+            }
+        }
+
+        getContacts();
+    }, []);
+
     const contactsContext = useContext(ContactContext);
     
     const deviceWidth = Dimensions.get('window').width;
