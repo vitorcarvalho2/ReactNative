@@ -1,21 +1,26 @@
-import { View, TextInput, StyleSheet } from 'react-native';
-import styleColors from '../../../assets/static/colors';
+import { View, TextInput, Text, StyleSheet } from "react-native";
+import styleColors from "../../../assets/static/colors";
 import Icon from "react-native-vector-icons/Ionicons";
 
-function Input({icon, textInputConfig}) {
-    return (
-        <View style={styles.inputContainer}>
-            <Icon
-                name={icon}
-                size={45}
-                color={styleColors.primaryColor}
-            />
-            <TextInput
-                style={styles.input}
-                {...textInputConfig}
-            ></TextInput>
-        </View>
-    )
+function Input({ icon, textInputConfig, errorMessage }) {
+  const inputStyle = [styles.input];
+  let iconColor = styleColors.primaryColor;
+
+  if (errorMessage) {
+    inputStyle.push(styles.inputError);
+    iconColor = "red";
+  }
+  return (
+    <>
+      <View style={styles.inputContainer}>
+        <Icon name={icon} size={45} color={iconColor} />
+        <TextInput style={inputStyle} {...textInputConfig}></TextInput>
+      </View>
+      <View style={styles.errorContainer}>
+        {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
+      </View>
+    </>
+  );
 }
 
 export default Input;
@@ -38,5 +43,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "85%",
     alignItems: "center",
+  },
+  errorContainer: {
+    display: "flex",
+    flexDirection: "column",
+    width: "85%",
+    alignItems: "center",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    marginTop: 4,
+    alignSelf: "flex-end",
+    width: "80%",
+    maxWidth: "80%", 
+  },
+  inputError: {
+    borderColor: "red",
   },
 });
