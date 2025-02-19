@@ -15,7 +15,7 @@ export async function fetchContacts() {
     try {
         const response = await axios.get(BACKEND_URL + '/contacts.json');
 
-        const contacts = [];
+            const contacts = [];
 
         for (const key in response.data) {
             const contact = {
@@ -29,5 +29,14 @@ export async function fetchContacts() {
 
     } catch (error) {
         return { status: 'ERROR' };
+    }
+}
+
+export async function deleteContact(contactId) {
+    try {
+        const response = await axios.delete(`${BACKEND_URL}/contacts/${contactId}.json`);
+        return { status: 'OK' };
+    } catch (error) {
+        return { status: 'ERROR', error: error.message };
     }
 }
