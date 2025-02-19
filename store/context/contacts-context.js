@@ -1,14 +1,10 @@
-import { createContext, useState, useReducer } from 'react';
-import { fetchContacts } from '../../utils/http';
-
-const contactsFromDB = fetchContacts();
-console.log(contactsFromDB);
+import { createContext, useReducer } from 'react';
 
 export const ContactContext = createContext({
     contacts: [],
     setContacts: (contacts) => {},
     addContact: (contactData) => {},
-    removeContact: (selectedId) => {},
+    deleteContact: (selectedId) => {},
     editContact: (contactData, selectedId) => {},
 });
 
