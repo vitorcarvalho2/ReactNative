@@ -7,7 +7,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import styleColors from "./assets/static/colors";
 import { stylesHeaderText } from "./assets/static/styles";
 
-
 import MainPage from "./screens/MainPage/MainPage";
 import AddContact from "./screens/AddContact/AddContact";
 import EditContact from "./screens/EditContact/EditContact";
@@ -25,7 +24,7 @@ export default function App() {
               headerTitleAlign: "center",
               headerStyle: {
                 backgroundColor: styleColors.secondaryColor,
-				paddingVertical: 60,
+                paddingVertical: 60,
               },
             }}
           >
@@ -64,7 +63,9 @@ export default function App() {
             <Stack.Screen
               name="EditContact"
               component={EditContact}
-              options={{ headerTitle: "Editar contato" }}
+              options={() => ({
+                headerTitle: "Editar contato",
+              })}
             />
           </Stack.Navigator>
         </NavigationContainer>

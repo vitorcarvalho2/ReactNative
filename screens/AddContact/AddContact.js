@@ -1,8 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import styleColors from "../../assets/static/colors";
 
-import ContactForm from "./components/AddContactForm";
+import styleColors from "../../assets/static/colors";
+import AddContactForm from "./components/AddContactForm";
 
 function AddContact({ navigation }) {
   return (
@@ -13,7 +13,7 @@ function AddContact({ navigation }) {
         color={styleColors.primaryColor}
         marginTop={30}
       />
-      <ContactForm navigation={navigation}/>
+      <AddContactForm navigation={navigation}/>
     </View>
   );
 }
