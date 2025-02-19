@@ -8,12 +8,12 @@ import DeleteContact from "./DeleteContact";
 import Input from "./Input";
 import { ContactContext } from "../../../store/context/contacts-context";
 import { validateFields } from "../../../utils/validation";
-import { deleteContact } from "../../../utils/http";
+import { updateContact, deleteContact } from "../../../utils/http";
 
 function EditContactForm({ navigation, selectedId }) {
-  const contactCtx = useContext(ContactContext);
   const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
-
+  const contactCtx = useContext(ContactContext);
+  
   const contactData = contactCtx.contacts.find(
     (contact) => contact.id === selectedId
   );
@@ -24,28 +24,37 @@ function EditContactForm({ navigation, selectedId }) {
     phone: contactData?.phone ,
     email: contactData?.email ,
   });
-
-  const [errors, setErrors] = useState({});
-
+  
   function InputHandler(field, value) {
     setFields({
       ...fields,
       [field]: value,
     });
   }
+  
+  const [errors, setErrors] = useState({});
 
-  function SaveHandler() {
-    const validationErrors = validateFields(fields);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-    contactCtx.editContact(fields, selectedId);
+  	async function SaveHandler() {
+    	const validationErrors = validateFields(fields);
+    	if (Object.keys(validationErrors).length > 0) {
+    		setErrors(validationErrors);
+    		return;
+    	}
 
-    navigation.navigate("MainPage");
-  }
+ 		const response = await updateContact(fields, selectedId);
 
-  async function DeleteContactHandler() {
+    	if (response.status === 'OK') {
+    	    contactCtx.editContact(fields, selectedId);
+    	    navigation.navigate("MainPage");
+    	} 
+    	else {
+    		Alert.alert("Erro ao salvar:", "Não foi possível se conectar ao servidor.");
+    	}
+
+    	navigation.navigate("MainPage");
+  	}
+  
+   async function DeleteContactHandler() {
     const response = await deleteContact(selectedId);
     setDeleteModalVisible(false);
     if (response.status === "OK") {
