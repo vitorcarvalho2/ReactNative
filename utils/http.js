@@ -11,6 +11,15 @@ export async function storeContact(contactData) {
     }
 }
 
+export async function alterContact(contactData, id) {
+    try {
+        const response = "";
+        return { status: 'OK' };
+    } catch (error) {
+        return { status: 'ERROR' };
+    }
+}
+
 export async function fetchContacts() {
     try {
         const response = await axios.get(BACKEND_URL + '/contacts.json');

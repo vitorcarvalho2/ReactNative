@@ -6,8 +6,7 @@ import styleColors from '../../../assets/static/colors';
 import { ContactContext } from '../../../store/context/contacts-context';
 import { fetchContacts } from '../../../utils/http';
 
-function ContactList({navigation}) {
-    
+function ContactList({navigation}) {  
     useEffect(() => {
         async function getContacts() {
             try {
@@ -18,7 +17,6 @@ function ContactList({navigation}) {
                 Alert.alert("Erro ao carregar contatos:", "Não foi possível se conectar ao servidor.");
             }
         }
-
         getContacts();
     }, []);
 
