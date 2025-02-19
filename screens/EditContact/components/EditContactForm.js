@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import Input from "./Input";
 import { ContactContext } from "../../../store/context/contacts-context";
 import { validateFields } from "../../../utils/validation";
-import { alterContact } from "../../../utils/http";
+import { updateContact } from "../../../utils/http";
 
 function EditContactForm({ navigation, selectedId }) {
   	const contactCtx = useContext(ContactContext);
@@ -15,10 +15,10 @@ function EditContactForm({ navigation, selectedId }) {
 
   	const [errors, setErrors] = useState({});
   	const [fields, setFields] = useState({
-  		name: contactData.name || "",
-  		cellphone: contactData.cellphone || "",
-  		phone: contactData.phone || "",
-  		email: contactData.email || "",
+  		name: contactData?.name,
+  		cellphone: contactData?.cellphone,
+  		phone: contactData?.phone,
+  		email: contactData?.email,
   	});
 
   	function InputHandler(field, value) {
@@ -35,7 +35,7 @@ function EditContactForm({ navigation, selectedId }) {
     		return;
     	}
 
- 		const response = await alterContact(fields, selectedId);
+ 		const response = await updateContact(fields, selectedId);
 
     	if (response.status === 'OK') {
     	    contactCtx.editContact(fields, selectedId);
@@ -44,8 +44,6 @@ function EditContactForm({ navigation, selectedId }) {
     	else {
     		Alert.alert("Erro ao salvar:", "Não foi possível se conectar ao servidor.");
     	}
-
-    	contactCtx.editContact(fields, selectedId);
 
     	navigation.navigate("MainPage");
   	}

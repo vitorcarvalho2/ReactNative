@@ -11,9 +11,9 @@ export async function storeContact(contactData) {
     }
 }
 
-export async function alterContact(contactData, id) {
+export async function updateContact(newData, id) {
     try {
-        const response = "";
+        const response = await axios.put(BACKEND_URL + `/contacts/${id}.json`, newData);
         return { status: 'OK' };
     } catch (error) {
         return { status: 'ERROR' };
