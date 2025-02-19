@@ -8,7 +8,7 @@ export const ContactContext = createContext({
     contacts: [],
     setContacts: (contacts) => {},
     addContact: (contactData) => {},
-    removeContact: (selectedId) => {},
+    deleteContact: (selectedId) => {},
     editContact: (contactData, selectedId) => {},
 });
 
