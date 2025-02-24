@@ -11,7 +11,7 @@ export const ContactContext = createContext({
 function contactsReducer(state, action) {
     switch (action.type) {
         case 'SET':
-            return action.payload;
+            return action.payload.sort((a, b) => a.name.localeCompare(b.name));
         case 'ADD':
             return [...state, {...action.payload}];
         case 'EDIT':
