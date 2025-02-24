@@ -43,7 +43,7 @@ export async function fetchContacts() {
 
 export async function deleteContact(contactId) {
     try {
-        const response = await axios.delete(`${BACKEND_URL}/contacts/${contactId}.json`);
+        await axios.delete(`${BACKEND_URL}/contacts/${contactId}.json`);
         return { status: 'OK' };
     } catch (error) {
         return { status: 'ERROR', error: error.message };

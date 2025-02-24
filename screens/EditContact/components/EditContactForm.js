@@ -82,7 +82,7 @@ function EditContactForm({ navigation, selectedId }) {
         {isDeleteModalVisible && (
           <DeleteContact
             onClose={() => setDeleteModalVisible(false)}
-            onConfirm={DeleteContactHandler}
+            onConfirm={() => DeleteContactHandler()}
           />
         )}
         <Input
