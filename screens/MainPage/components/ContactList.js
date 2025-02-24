@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styleColors from '../../../assets/static/colors';
@@ -6,12 +6,16 @@ import styleColors from '../../../assets/static/colors';
 import { ContactContext } from '../../../store/context/contacts-context';
 import { fetchContacts } from '../../../utils/http';
 
-function ContactList({navigation}) {  
+function ContactList({navigation, query}) {  
+    const contactsContext = useContext(ContactContext);
+    const [contacts, setContacts] = useState([]);
+
     useEffect(() => {
         async function getContacts() {
             try {
-                const contacts = await fetchContacts();
-                contactsContext.setContacts(contacts.data);
+                const contactsFromDB = await fetchContacts();
+                contactsContext.setContacts(contactsFromDB.data);
+                setContacts(contactsFromDB.data);
             }
             catch (error) {
                 Alert.alert("Erro ao carregar contatos:", "Não foi possível se conectar ao servidor.");
@@ -20,7 +24,16 @@ function ContactList({navigation}) {
         getContacts();
     }, []);
 
-    const contactsContext = useContext(ContactContext);
+    useEffect(() => {
+        if (query) {
+            setContacts(
+                contactsContext.contacts.filter((contact) => contact.name.toLowerCase().includes(query.toLowerCase()))
+            );
+        }
+        else {
+            setContacts(contactsContext.contacts);
+        }
+    }, [query])
     
     const deviceWidth = Dimensions.get('window').width;
     const styles = deviceWidth >= 800 ? styleLG : styleSM;
@@ -30,7 +43,7 @@ function ContactList({navigation}) {
             <FlatList
                 style={styles.contactList}
                 contentContainerStyle={{alignItems: 'start'}}
-                data={contactsContext.contacts}
+                data={contacts}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <View style={styles.contactCard}>

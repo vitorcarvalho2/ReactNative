@@ -1,5 +1,5 @@
 import { View, Modal, Button, StyleSheet } from "react-native";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useCallback } from "react";
 
 import Icon from "react-native-vector-icons/Ionicons";
 import globalStyleColors from "../../../assets/static/colors";
@@ -34,34 +34,33 @@ function EditContactForm({ navigation, selectedId }) {
   
   const [errors, setErrors] = useState({});
 
-  	async function SaveHandler() {
-    	const validationErrors = validateFields(fields);
-    	if (Object.keys(validationErrors).length > 0) {
-    		setErrors(validationErrors);
-    		return;
-    	}
-
- 		const response = await updateContact(fields, selectedId);
-
-    	if (response.status === 'OK') {
-    	    contactCtx.editContact(fields, selectedId);
-    	    navigation.navigate("MainPage");
-    	} 
-    	else {
-    		Alert.alert("Erro ao salvar:", "Não foi possível se conectar ao servidor.");
-    	}
-
-    	navigation.navigate("MainPage");
+  async function SaveHandler() {
+  	const validationErrors = validateFields(fields);
+  	if (Object.keys(validationErrors).length > 0) {
+  		setErrors(validationErrors);
+  		return;
   	}
+ 	  const response = await updateContact(fields, selectedId);
+    if (response.status === 'OK') {
+        contactCtx.editContact(fields, selectedId);
+        navigation.navigate("MainPage");
+    } 
+    else {
+    	Alert.alert("Erro ao salvar:", "Não foi possível se conectar ao servidor.");
+    }
+    navigation.navigate("MainPage");
+  }
   
-   async function DeleteContactHandler() {
+  const DeleteContactHandler = useCallback(async () => {
     const response = await deleteContact(selectedId);
     setDeleteModalVisible(false);
     if (response.status === "OK") {
       contactCtx.deleteContact(selectedId);
       navigation.navigate("MainPage");
+    } else {
+      Alert.alert("Erro ao apagar:", "Não foi possível se conectar ao servidor.");
     }
-  }
+  }, [selectedId, contactCtx, navigation]);
 
   useEffect(() => {
     navigation.setOptions({
