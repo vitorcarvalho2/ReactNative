@@ -5,11 +5,11 @@ import Icon from "react-native-vector-icons/Ionicons";
 function Input({ icon, textInputConfig, errorMessage }) {
 
   const inputStyle = [styles.input];
-  let iconColor = styleColors.primaryColor;
+  let iconColor = styleColors.primary100;
 
   if(errorMessage) {
     inputStyle.push(styles.inputError);
-    iconColor = "red";
+    iconColor = "rgb(244, 96, 96)";
   }
 
   return (
@@ -31,13 +31,13 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     margin: 16,
-    borderWidth: 1.5,
+    borderWidth: 2,
     borderRadius: 20,
-    borderColor: styleColors.primaryColor,
+    borderColor: styleColors.primary200,
     padding: 10,
     width: "80%",
     maxWidth: "80%",
-    backgroundColor: "white",
+    backgroundColor: styleColors.secondary400,
     elevation: 5,
   },
   inputContainer: {
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   errorText: {
-    color: "red",
+    color: "rgb(244, 96, 96)",
     fontSize: 12,
     marginTop: 4,
     alignSelf: "flex-end",
@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
     maxWidth: "80%", 
   },
   inputError: {
-    borderColor: "red",
+    borderColor: "rgb(244, 96, 96)",
   },
 });

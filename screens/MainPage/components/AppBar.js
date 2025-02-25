@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import styleColors from '../../../assets/static/colors';
+import colors from "../../../assets/static/colors";
 
 function AppBar() {
   const deviceWidth = Dimensions.get('window').width;
@@ -18,7 +19,7 @@ const styleLG = StyleSheet.create({
   appBar: {
       flex: 1.2,
       width: "100%",
-      backgroundColor: styleColors.primaryColor,
+      backgroundColor: styleColors.primary100,
       alignItems: "center",
       alignContent: "center",
       justifyContent: "center",
@@ -39,7 +40,7 @@ const styleSM = StyleSheet.create({
     appBar: {
         flex: 1.1,
         width: "100%",
-        backgroundColor: styleColors.primaryColor,
+        backgroundColor: styleColors.primary100,
         alignItems: "center",
         alignContent: "center",
         justifyContent: "center",
@@ -47,7 +48,7 @@ const styleSM = StyleSheet.create({
       },
       AppBarText: {
         fontSize: 22,
-        color: "white",
+        color: colors.secondary300,
         fontFamily: " Arial",
         fontStyle: "italic",
         fontVariant: "small-caps",

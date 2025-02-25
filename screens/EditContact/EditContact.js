@@ -4,22 +4,30 @@ import styleColors from "../../assets/static/colors";
 import { useRoute } from "@react-navigation/native";
 
 import EditContactForm from "./components/EditContactForm";
+import { LinearGradient } from "expo-linear-gradient";
 
-function EditContact({navigation}) {
-    const route = useRoute();
-    const selectedId = route.params.id;
+function EditContact({ navigation }) {
+  const route = useRoute();
+  const selectedId = route.params.id;
 
-    return (
+  return (
+    <>
+      <LinearGradient
+        colors={[styleColors.secondary400, styleColors.secondary100]}
+        style={{ flex: 1 }}
+      >
         <View style={styles.container}>
-            <Icon
-                name="person-circle"
-                size={160}
-                color={styleColors.primaryColor}
-                marginTop={30}
-            />
-            <EditContactForm navigation={navigation} selectedId={selectedId}/>
+          <Icon
+            name="person-circle"
+            size={160}
+            color={styleColors.primary100}
+            marginTop={30}
+          />
+          <EditContactForm navigation={navigation} selectedId={selectedId} />
         </View>
-      );
+      </LinearGradient>
+    </>
+  );
 }
 
 export default EditContact;
@@ -27,7 +35,6 @@ export default EditContact;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: styleColors.secondaryColor,
     alignItems: "center",
   },
 });

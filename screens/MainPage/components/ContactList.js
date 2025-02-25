@@ -39,6 +39,7 @@ function ContactList({navigation, query}) {
     const styles = deviceWidth >= 800 ? styleLG : styleSM;
 
     return (
+        
          <View style={styles.body}>
             <FlatList
                 style={styles.contactList}
@@ -51,7 +52,7 @@ function ContactList({navigation, query}) {
                             <Icon 
                                 name="person-circle" 
                                 size={deviceWidth >= 800 ? 100 : 60} 
-                                color={styleColors.primaryColor} 
+                                color={styleColors.primary100} 
                             />
                             <Text style={styles.infoText}>
                                 {item.name}
@@ -60,7 +61,7 @@ function ContactList({navigation, query}) {
                         <Icon 
                             name="pencil-sharp" 
                             size={deviceWidth >= 800 ? 45 : 30} 
-                            color={styleColors.primaryColor}
+                            color={styleColors.primary100}
                             onPress={() => navigation.navigate('EditContact', {id: item.id})} 
                         />
                     </View>
@@ -74,7 +75,7 @@ function ContactList({navigation, query}) {
 const styleSM = StyleSheet.create({
     body: {
         alignItems: 'center',
-        backgroundColor: styleColors.secondaryColor,
+        backgroundColor: styleColors.secondary300,
         flex: 20,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -84,7 +85,7 @@ const styleSM = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         borderBottomWidth: 2,
-        borderColor: styleColors.borderColorOpaque,
+        borderColor: styleColors.primary100,
         flexDirection: 'row',
         height: 100,
         justifyContent: 'space-around',
@@ -94,7 +95,6 @@ const styleSM = StyleSheet.create({
     contactList: {
         flexDirection: 'column',
         height: "100%",
-        marginTop: 5,
         width: "100%",
     },
     infoSection: {
@@ -104,14 +104,8 @@ const styleSM = StyleSheet.create({
         width: "70%",
     },
     infoText: {
-        color: styleColors.textColor,
+        color: styleColors.primary100,
         fontSize: 20,
-        fontWeight: 'Bold',
-        marginLeft: 10,
-    },
-    infoText: {
-        color: styleColors.textColor,
-        fontSize: 25,
         fontWeight: 'Bold',
         marginLeft: 10,
     },
@@ -120,7 +114,7 @@ const styleSM = StyleSheet.create({
 const styleLG = StyleSheet.create({
     body: {
         alignItems: 'center',
-        backgroundColor: styleColors.secondaryColor,
+        backgroundColor: styleColors.secondary300,
         flex: 20,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -130,7 +124,7 @@ const styleLG = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         borderBottomWidth: 2,
-        borderColor: styleColors.borderColorOpaque,
+        borderColor: styleColors.primary100,
         flexDirection: 'row',
         height: 150,
         justifyContent: 'space-around',
@@ -150,7 +144,7 @@ const styleLG = StyleSheet.create({
         width: "70%",
     },
     infoText: {
-        color: styleColors.textColor,
+        color: styleColors.primary100,
         fontSize: 30,
         fontWeight: 'Bold',
         marginLeft: 10,
