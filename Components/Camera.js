@@ -118,17 +118,17 @@ function Camera({ onImagePicked, existingImage, children }) {
   return (
     <View style={styles.iconContainer}>
       {pickedImage ? (
+        <Image
+          source={{ uri: pickedImage }}
+          style={styles.image}
+          onError={() => setPickedImage(null)}
+        />
+      ) : (
         <Icon
           style={styles.icon}
           name="person-circle"
           size={160}
           color={styleColors.primary100}
-        />
-      ) : (
-        <Image
-          source={{ uri: pickedImage }}
-          style={styles.image}
-          onError={() => setPickedImage(null)}
         />
       )}
       <Pressable onPress={openModal}>
