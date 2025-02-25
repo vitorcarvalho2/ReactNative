@@ -6,12 +6,13 @@ export const ContactContext = createContext({
     addContact: (contactData) => {},
     deleteContact: (selectedId) => {},
     editContact: (contactData, selectedId) => {},
+    filterContacts: (query) => {},
 });
 
 function contactsReducer(state, action) {
     switch (action.type) {
         case 'SET':
-            return action.payload;
+            return action.payload.sort((a, b) => a.name.localeCompare(b.name));
         case 'ADD':
             return [...state, {...action.payload}];
         case 'EDIT':
@@ -23,6 +24,11 @@ function contactsReducer(state, action) {
             });
         case 'DELETE':
             return state.filter((contact) => contact.id !== action.payload);
+
+        case 'FILTER':
+            return state.filter((contact) => 
+                contact.name.toLowerCase().includes(action.payload.toLowerCase())
+            );
 
         default:
             return state
@@ -48,12 +54,18 @@ function ContactsContextProvider({children}) {
         dispatch({ type: 'DELETE', payload: selectedId });
     }
 
+    function filterContacts(searchTerm) {
+        dispatch({ type: 'FILTER', payload: searchTerm });
+    }
+
     const value = {
         contacts: contacts,
         addContact: addContact,
         setContacts: setContacts,
         editContact: editContact,
         deleteContact: deleteContact,
+        filterContacts: filterContacts,
+        
     }
 
     return <ContactContext.Provider value={value}>{children}</ContactContext.Provider>;

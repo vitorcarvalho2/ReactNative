@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     footer: {
         flex: 0.1,
         width: "100%",
-        backgroundColor: styleColors.secondaryColor,
+        backgroundColor: styleColors.primary200,
         bottom: 0,
     },
 });

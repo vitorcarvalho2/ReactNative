@@ -1,11 +1,16 @@
-const primaryColor = "rgb(3, 36, 14)";
-const secondaryColor = "rgb(229, 252, 238)";
-const textColor = "rgb(3, 36, 14)";
-const borderColorOpaque = "rgba(3, 36, 14, 0.20)";
-
+const primary100 = "#03045e";
+const primary200 = "#0077b6";
+const secondary100 = "#00b4d8"
+const secondary200 = "#90e0ef";
+const secondary300 = "#caf0f8";
+const secondary400 = "#e0f7fa";
+const error ="rgb(244, 96, 96)"
 export default {
-    primaryColor,
-    secondaryColor,
-    textColor,
-    borderColorOpaque,
+    primary100,
+    primary200,
+    secondary100,
+    secondary200,
+    secondary300,
+    secondary400,
+    error
 }

@@ -4,7 +4,7 @@ import { Dimensions } from "react-native";
 const deviceWidth = Dimensions.get("window").width;
 
 const stylesHeaderSM = {
-  color: styleColors.textColor,
+  color: styleColors.primary100,
   fontFamily: " Arial",
   fontSize: 33,
   fontStyle: "italic",
@@ -16,7 +16,7 @@ const stylesHeaderSM = {
 
 const stylesHeaderLG = {
 
-  color: styleColors.textColor,
+  color: styleColors.primary100,
   fontFamily: " Arial",
   fontSize: 48,
   fontStyle: "italic",
