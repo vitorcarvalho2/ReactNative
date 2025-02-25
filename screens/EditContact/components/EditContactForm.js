@@ -1,12 +1,14 @@
 import { View, StyleSheet } from "react-native";
 import { useState, useContext, useEffect, useCallback } from "react";
 
-import Button from "./Button";
 import Icon from "react-native-vector-icons/Ionicons";
-import globalStyleColors from "../../../assets/static/colors";
+import styleColors from "../../../assets/static/colors";
 import DeleteContact from "./DeleteContact";
 
-import Input from "./Input";
+import Button from "../../../Components/Button";
+import Input from "../../../Components/Input";
+import Camera from "../../../Components/Camera";
+
 import { ContactContext } from "../../../store/context/contacts-context";
 import { validateFields } from "../../../utils/validation";
 import { updateContact, deleteContact } from "../../../utils/http";
@@ -14,44 +16,47 @@ import { updateContact, deleteContact } from "../../../utils/http";
 function EditContactForm({ navigation, selectedId }) {
   const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
   const contactCtx = useContext(ContactContext);
-  
+
   const contactData = contactCtx.contacts.find(
     (contact) => contact.id === selectedId
   );
 
   const [fields, setFields] = useState({
-    name: contactData?.name ,
-    cellphone: contactData?.cellphone ,
-    phone: contactData?.phone ,
-    email: contactData?.email ,
+    name: contactData?.name,
+    cellphone: contactData?.cellphone,
+    phone: contactData?.phone,
+    email: contactData?.email,
+    image: contactData?.image,
   });
-  
+
   function InputHandler(field, value) {
     setFields({
       ...fields,
       [field]: value,
     });
   }
-  
+
   const [errors, setErrors] = useState({});
 
   async function SaveHandler() {
-  	const validationErrors = validateFields(fields);
-  	if (Object.keys(validationErrors).length > 0) {
-  		setErrors(validationErrors);
-  		return;
-  	}
- 	  const response = await updateContact(fields, selectedId);
-    if (response.status === 'OK') {
-        contactCtx.editContact(fields, selectedId);
-        navigation.navigate("MainPage");
-    } 
-    else {
-    	Alert.alert("Erro ao salvar:", "Não foi possível se conectar ao servidor.");
+    const validationErrors = validateFields(fields);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+    const response = await updateContact(fields, selectedId);
+    if (response.status === "OK") {
+      contactCtx.editContact(fields, selectedId);
+      navigation.navigate("MainPage");
+    } else {
+      Alert.alert(
+        "Erro ao salvar:",
+        "Não foi possível se conectar ao servidor."
+      );
     }
     navigation.navigate("MainPage");
   }
-  
+
   const DeleteContactHandler = useCallback(async () => {
     const response = await deleteContact(selectedId);
     setDeleteModalVisible(false);
@@ -59,7 +64,10 @@ function EditContactForm({ navigation, selectedId }) {
       contactCtx.deleteContact(selectedId);
       navigation.navigate("MainPage");
     } else {
-      Alert.alert("Erro ao apagar:", "Não foi possível se conectar ao servidor.");
+      Alert.alert(
+        "Erro ao apagar:",
+        "Não foi possível se conectar ao servidor."
+      );
     }
   }, [selectedId, contactCtx, navigation]);
 
@@ -69,7 +77,7 @@ function EditContactForm({ navigation, selectedId }) {
         <Icon
           name="trash-outline"
           size={25}
-          color={globalStyleColors.primary100}
+          color={styleColors.primary100}
           onPress={() => setDeleteModalVisible(true)}
         />
       ),
@@ -85,6 +93,11 @@ function EditContactForm({ navigation, selectedId }) {
             onConfirm={() => DeleteContactHandler()}
           />
         )}
+        <Camera
+          children={"Editar foto"}
+          existingImage={fields.image}
+          onImagePicked={(image) => InputHandler("image", image)}
+        />
         <Input
           icon="person-outline"
           errorMessage={errors.name}

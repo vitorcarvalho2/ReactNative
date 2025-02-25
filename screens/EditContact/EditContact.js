@@ -17,12 +17,6 @@ function EditContact({ navigation }) {
         style={{ flex: 1 }}
       >
         <View style={styles.container}>
-          <Icon
-            name="person-circle"
-            size={160}
-            color={styleColors.primary100}
-            marginTop={30}
-          />
           <EditContactForm navigation={navigation} selectedId={selectedId} />
         </View>
       </LinearGradient>

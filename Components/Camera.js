@@ -8,8 +8,8 @@ import {
   Modal,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import styleColors from "../../../assets/static/colors";
-import { useState } from "react";
+import styleColors from "../assets/static/colors";
+import { useEffect, useState } from "react";
 import {
   launchImageLibraryAsync,
   launchCameraAsync,
@@ -17,15 +17,22 @@ import {
   useCameraPermissions,
   PermissionStatus,
 } from "expo-image-picker";
+import LocalData from "../store/context/LocalData";
 
-function Camera({ onImagePicked }) {
-  const [pickedImage, setPickedImage] = useState();
+function Camera({ onImagePicked, existingImage, children }) {
+  const [pickedImage, setPickedImage] = useState(existingImage || null);
   const [modalVisible, setModalVisible] = useState(false);
 
   const [cameraPermissionInformation, requestPermission] =
     useCameraPermissions();
   const [mediaLibraryPermissionInformation, requestMediaLibraryPermission] =
     useMediaLibraryPermissions();
+
+  useEffect(() => {
+    if (existingImage) {
+      setPickedImage(existingImage);
+    }
+  }, [existingImage]);
 
   async function verifyCameraPermissions() {
     if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
@@ -76,8 +83,9 @@ function Camera({ onImagePicked }) {
       return;
     }
     const pickedImageObject = image.assets[0];
-    setPickedImage(pickedImageObject.uri);
-    onImagePicked(pickedImageObject);
+    const localPath = await LocalData(pickedImageObject.uri);
+    setPickedImage(localPath);
+    onImagePicked(localPath);
     setModalVisible(false);
   }
 
@@ -97,8 +105,9 @@ function Camera({ onImagePicked }) {
     }
 
     const pickedImageObject = image.assets[0];
-    setPickedImage(pickedImageObject.uri);
-    onImagePicked(pickedImageObject);
+    const localPath = await LocalData(pickedImageObject.uri);
+    setPickedImage(localPath);
+    onImagePicked(localPath);
     setModalVisible(false);
   }
 
@@ -115,14 +124,20 @@ function Camera({ onImagePicked }) {
     />
   );
   if (pickedImage) {
-    image = <Image source={{ uri: pickedImage }} style={styles.image} />;
+    image = (
+      <Image
+        source={{ uri: pickedImage }}
+        style={styles.image}
+        onError={() => setPickedImage(null)}
+      />
+    );
   }
 
   return (
     <View style={styles.iconContainer}>
       {image}
       <Pressable onPress={openModal}>
-        <Text style={styles.addImageText}>Adicionar Foto</Text>
+        <Text style={styles.addImageText}>{children}</Text>
       </Pressable>
 
       <Modal
