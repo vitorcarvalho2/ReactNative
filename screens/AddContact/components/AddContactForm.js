@@ -3,10 +3,11 @@ import { useState, useContext } from "react";
 
 import Input from "./Input";
 import Button from "./Button";
+import Camera from "./Camera";
+
 import { ContactContext } from "../../../store/context/contacts-context";
 import { validateFields } from "../../../utils/validation";
 import { storeContact } from "../../../utils/http";
-import Camera from "./Camera";
 
 function AddContactForm({ navigation }) {
   const contactCtx = useContext(ContactContext);
@@ -16,6 +17,7 @@ function AddContactForm({ navigation }) {
     cellphone: "",
     phone: "",
     email: "",
+    image: null,
   });
 
   function InputHandler(field, value) {
@@ -44,10 +46,14 @@ function AddContactForm({ navigation }) {
     }
   }
 
+  function handleImagePicked(imageUri) {
+    InputHandler("image", imageUri);
+  }
+
   return (
     <>
       <View style={styles.formContainer}>
-        <Camera />
+        <Camera onImagePicked={handleImagePicked} />
         <Input
           icon="person-outline"
           errorMessage={errors.name}
