@@ -1,5 +1,5 @@
 import { View, TextInput, Text, StyleSheet } from "react-native";
-import styleColors from "../../../assets/static/colors";
+import styleColors from "../assets/static/colors";  
 import Icon from "react-native-vector-icons/Ionicons";
 
 function Input({ icon, textInputConfig, errorMessage }) {
@@ -9,7 +9,7 @@ function Input({ icon, textInputConfig, errorMessage }) {
 
   if(errorMessage) {
     inputStyle.push(styles.inputError);
-    iconColor = "rgb(244, 96, 96)";
+    iconColor = styleColors.error;
   }
 
   return (
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   errorText: {
-    color: "rgb(244, 96, 96)",
+    color: styleColors.error,
     fontSize: 12,
     marginTop: 4,
     alignSelf: "flex-end",
@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
     maxWidth: "80%", 
   },
   inputError: {
-    borderColor: "rgb(244, 96, 96)",
+    borderColor: styleColors.error,
   },
 });

@@ -1,9 +1,9 @@
 import { View, StyleSheet, Alert } from "react-native";
 import { useState, useContext } from "react";
 
-import Input from "./Input";
-import Button from "./Button";
-import Camera from "./Camera";
+import Input from "../../../Components/Input";
+import Button from "../../../Components/Button";
+import Camera from "../../../Components/Camera";
 
 import { ContactContext } from "../../../store/context/contacts-context";
 import { validateFields } from "../../../utils/validation";
@@ -17,7 +17,7 @@ function AddContactForm({ navigation }) {
     cellphone: "",
     phone: "",
     email: "",
-    image: null,
+    image: "",
   });
 
   function InputHandler(field, value) {
@@ -53,7 +53,10 @@ function AddContactForm({ navigation }) {
   return (
     <>
       <View style={styles.formContainer}>
-        <Camera onImagePicked={handleImagePicked} />
+        <Camera 
+        children={"Adicionar Foto"}
+        image={null}
+        onImagePicked={handleImagePicked} />
         <Input
           icon="person-outline"
           errorMessage={errors.name}

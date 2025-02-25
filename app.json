@@ -28,7 +28,8 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "The app accesses your photos to add to your contacts."
+          "photosPermission": "The app accesses your photos to add to your contacts.",
+          "cameraPermission": "The app accesses your camera to capture photos for your contacts."
         }
       ]
     ]

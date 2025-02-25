@@ -1,6 +1,6 @@
 import { View, Pressable, Text, StyleSheet } from "react-native";
 
-import styleColors from "../../../assets/static/colors";
+import styleColors from "../assets/static/colors";
 function Button({ title, onPress }) {
   return (
     <Pressable
