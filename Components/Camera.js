@@ -115,27 +115,22 @@ function Camera({ onImagePicked, existingImage, children }) {
     setModalVisible(true);
   }
 
-  let image = (
-    <Icon
-      style={styles.icon}
-      name="person-circle"
-      size={160}
-      color={styleColors.primary100}
-    />
-  );
-  if (pickedImage) {
-    image = (
-      <Image
-        source={{ uri: pickedImage }}
-        style={styles.image}
-        onError={() => setPickedImage(null)}
-      />
-    );
-  }
-
   return (
     <View style={styles.iconContainer}>
-      {image}
+      {pickedImage ? (
+        <Icon
+          style={styles.icon}
+          name="person-circle"
+          size={160}
+          color={styleColors.primary100}
+        />
+      ) : (
+        <Image
+          source={{ uri: pickedImage }}
+          style={styles.image}
+          onError={() => setPickedImage(null)}
+        />
+      )}
       <Pressable onPress={openModal}>
         <Text style={styles.addImageText}>{children}</Text>
       </Pressable>
