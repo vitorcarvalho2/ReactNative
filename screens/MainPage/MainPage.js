@@ -6,9 +6,8 @@ import {
   StyleSheet,
   Animated,
 } from "react-native";
-import { useState, useContext, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
-import { ContactContext } from "../../store/context/contacts-context";
 
 import styleColors from "../../assets/static/colors";
 import { stylesHeaderText } from "../../assets/static/styles";
@@ -16,7 +15,6 @@ import { stylesHeaderText } from "../../assets/static/styles";
 import AppBar from "./components/AppBar";
 import ContactList from "./components/ContactList";
 import Footer from "./components/Footer";
-import { LinearGradient } from "expo-linear-gradient";
 
 function MainPage({ navigation }) {
   const [query, setQuery] = useState("");
@@ -82,7 +80,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: styleColors.primary200,
     padding: 10,
-    width: "100%",
+    width: "90%",
     backgroundColor: styleColors.secondary400,
     elevation: 5,
     margin: 10,
