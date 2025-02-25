@@ -1,11 +1,4 @@
-import {
-  View,
-  TextInput,
-  FlatList,
-  Text,
-  StyleSheet,
-  Animated,
-} from "react-native";
+import { View, TextInput, StyleSheet } from "react-native";
 import { useState, useEffect, useCallback } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -48,21 +41,21 @@ function MainPage({ navigation }) {
   }, [navigation, isSearchVisible]);
 
   return (
-      <View style={styles.container}>
-        {isSearchVisible ? (
-          <TextInput
-            style={styles.input}
-            placeholder="Procurar"
-            value={query}
-            onChangeText={handleSearch}
-            autoFocus={true}
-          />
-        ) : (
-          <AppBar />
-        )}
-        <ContactList navigation={navigation} query={query} />
-        <Footer />
-      </View>
+    <View style={styles.container}>
+      {isSearchVisible ? (
+        <TextInput
+          style={styles.input}
+          placeholder="Procurar"
+          value={query}
+          onChangeText={handleSearch}
+          autoFocus={true}
+        />
+      ) : (
+        <AppBar />
+      )}
+      <ContactList navigation={navigation} query={query} />
+      <Footer />
+    </View>
   );
 }
 
