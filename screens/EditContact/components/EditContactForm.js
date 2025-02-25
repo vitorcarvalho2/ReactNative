@@ -1,6 +1,7 @@
-import { View, Modal, Button, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useState, useContext, useEffect, useCallback } from "react";
 
+import Button from "./Button";
 import Icon from "react-native-vector-icons/Ionicons";
 import globalStyleColors from "../../../assets/static/colors";
 import DeleteContact from "./DeleteContact";
@@ -68,7 +69,7 @@ function EditContactForm({ navigation, selectedId }) {
         <Icon
           name="trash-outline"
           size={25}
-          color={globalStyleColors.primaryColor}
+          color={globalStyleColors.primary100}
           onPress={() => setDeleteModalVisible(true)}
         />
       ),

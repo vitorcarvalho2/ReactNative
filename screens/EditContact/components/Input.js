@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 function Input({ icon, textInputConfig, errorMessage }) {
   const inputStyle = [styles.input];
-  let iconColor = styleColors.primaryColor;
+  let iconColor = styleColors.primary100;
 
   if (errorMessage) {
     inputStyle.push(styles.inputError);
@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
     margin: 16,
     borderWidth: 1.5,
     borderRadius: 20,
-    borderColor: styleColors.primaryColor,
+    borderColor: styleColors.primary200,
     padding: 10,
     width: "80%",
     maxWidth: "80%",
-    backgroundColor: "white",
+    backgroundColor: styleColors.secondary400,
     elevation: 5,
   },
   inputContainer: {

@@ -20,14 +20,14 @@ function DeleteContact({ onClose, onConfirm }) {
             <Icon
               name="close"
               size={30}
-              color={globalStyleColors.primaryColor}
+              color={globalStyleColors.primary100}
               onPress={onClose}
               style={styles.button}
             />
             <Icon
               name="checkmark"
               size={30}
-              color={globalStyleColors.primaryColor}
+              color={globalStyleColors.primary100}
               onPress={onConfirm}
               style={styles.button}
             />
@@ -48,21 +48,21 @@ const styles = StyleSheet.create({
   modal: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: globalStyleColors.secondaryColor,
+    backgroundColor: globalStyleColors.secondary200,
     padding: 20,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: globalStyleColors.primaryColor,
+    borderColor: globalStyleColors.primary100,
     width: "80%",
   },
   title: {
-    color: globalStyleColors.primaryColor,
+    color: globalStyleColors.primary100,
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
   },
   message: {
-    color: globalStyleColors.textColor,
+    color: globalStyleColors.primary100,
     marginBottom: 20,
     textAlign: "center",
   },
@@ -74,10 +74,11 @@ const styles = StyleSheet.create({
   },
   button: {
     marginHorizontal: 30,
-    backgroundColor: globalStyleColors.secondaryColor,
+    backgroundColor: globalStyleColors.secondary100,
     borderRadius: 100,
     padding: 10,
     borderWidth: 2,
+    borderColor: globalStyleColors.primary100,
   },
 });
 

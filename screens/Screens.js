@@ -18,8 +18,9 @@ export default function Navigation() {
             <Stack.Navigator
               screenOptions={{
                 headerTitleAlign: "center",
+                
                 headerStyle: {
-                  backgroundColor: styleColors.secondaryColor,
+                  backgroundColor: styleColors.primary200,
                   paddingVertical: 60,
                 },
               }}
@@ -27,29 +28,6 @@ export default function Navigation() {
               <Stack.Screen
                 name="MainPage"
                 component={MainPage}
-                options={({ navigation }) => ({
-                  headerTitle: "Contatos",
-                  headerStyle: {
-                    backgroundColor: styleColors.secondaryColor,
-                  },
-                  headerTitleStyle: stylesHeaderText,
-                  headerRight: () => (
-                    <Icon
-                      name="add-outline"
-                      size={40}
-                      color={styleColors.primaryColor}
-                      onPress={() => navigation.navigate("AddContact")}
-                    />
-                  ),
-                  headerLeft: () => (
-                    <Icon
-                      name="search-outline"
-                      size={40}
-                      color={styleColors.primaryColor}
-                      onPress={() => console.log("Press")}
-                    />
-                  ),
-                })}
               />
               <Stack.Screen
                 name="AddContact"

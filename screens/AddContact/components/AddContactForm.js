@@ -1,7 +1,8 @@
-import { View, Button, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { useState, useContext } from "react";
 
 import Input from "./Input";
+import Button from "./Button";
 import { ContactContext } from "../../../store/context/contacts-context";
 import { validateFields } from "../../../utils/validation";
 import { storeContact } from '../../../utils/http';
