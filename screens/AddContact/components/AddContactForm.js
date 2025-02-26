@@ -1,9 +1,10 @@
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, ScrollView } from "react-native";
 import { useState, useContext } from "react";
 
 import Input from "../../../Components/Input";
 import Button from "../../../Components/Button";
 import Camera from "../../../Components/Camera";
+import Location from "../../../Components/Location";
 
 import { ContactContext } from "../../../store/context/contacts-context";
 import { validateFields } from "../../../utils/validation";
@@ -52,11 +53,15 @@ function AddContactForm({ navigation }) {
 
   return (
     <>
-      <View style={styles.formContainer}>
-        <Camera 
+      <ScrollView
+        contentContainerStyle={{ alignItems: "center" }}
+        style={styles.formContainer}
+      >
+      <Camera
         children={"Adicionar Foto"}
         image={null}
-        onImagePicked={handleImagePicked} />
+        onImagePicked={handleImagePicked}
+      />
         <Input
           icon="person-outline"
           errorMessage={errors.name}
@@ -103,7 +108,8 @@ function AddContactForm({ navigation }) {
             value: fields.email,
           }}
         />
-      </View>
+        <Location />
+      </ScrollView>
       <Button title="Salvar" onPress={SaveHandler} />
     </>
   );
@@ -114,7 +120,8 @@ export default AddContactForm;
 const styles = StyleSheet.create({
   formContainer: {
     width: "100%",
-    alignItems: "center",
-    marginVertical: 50,
+	flexGrow: 1,
+    height: "70%",
+    marginVertical: 0,
   },
 });
