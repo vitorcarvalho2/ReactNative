@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     marginBottom: 50,
-
   },
   input: {
     borderWidth: 1.5,
