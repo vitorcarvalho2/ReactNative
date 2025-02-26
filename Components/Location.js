@@ -8,8 +8,8 @@ import { getCoordinates } from "../utils/geocode";
 export default function Location({ onLocationPicked }) {
   const [address, setAddress] = useState("");
   const [markedRegion, setMarkedRegion] = useState({
-    latitude: -23.4983929,
-    longitude: -46.8424602,
+    latitude: -23.5506507,
+    longitude: -46.6333824,
     latitudeDelta: 0.15,
     longitudeDelta: 0.1,
   });
