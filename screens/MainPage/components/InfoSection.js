@@ -27,7 +27,7 @@ function InfoSection({ item }) {
 
       <View style={styles.infoContainer}>
         <Text style={styles.infoName}>{item.name}</Text>
-        <Text style={styles.infoNumber}>{item.phone}</Text>
+        <Text style={styles.infoNumber}>{item.cellphone}</Text>
       </View>
     </View>
   );

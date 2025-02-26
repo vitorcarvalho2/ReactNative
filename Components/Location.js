@@ -1,46 +1,48 @@
 import Input from "./Input";
-import Button from "./Button";
 import { useState } from "react";
-import { View, Pressable, Text, StyleSheet } from "react-native";
+import { View, Pressable, Text, StyleSheet, Alert } from "react-native";
 import styleColors from "../assets/static/colors";
 import MapView, { Marker } from "react-native-maps";
-
 import { getCoordinates } from "../utils/geocode";
 
-export default function Location() {
-  const mockRegion = {
-    latitude: -23.55052,
-    longitude: -46.633308,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  };
-
-  const [markedLocation, setMarkedLocation] = useState({
-    latitude: mockRegion.latitude,
-    longitude: mockRegion.longitude,
+export default function Location({ onLocationPicked }) {
+  const [address, setAddress] = useState("");
+  const [markedRegion, setMarkedRegion] = useState({
+    latitude: -23.4983929,
+    longitude: -46.8424602,
+    latitudeDelta: 0.15,
+    longitudeDelta: 0.1,
   });
 
-  function selectLocationHandler(event) {
-    const lat = event.nativeEvent.coordinate.latitude;
-    const lng = event.nativeEvent.coordinate.longitude;
-
-    setMarkedLocation({
-      latitude: lat,
-      longitude: lng,
-    });
-  }
-
-  async function getCoordinatesHandler(address) {
-    console.log(address);
+  async function inputTravelHandler(address) {
     const response = await getCoordinates(address);
+
     if (response.status === "OK") {
-      //console.log(response);
+      const location = response.data[0];
+      const lat = parseFloat(location.lat);
+      const lon = parseFloat(location.lon);
+
+      onLocationPicked({ lat, lon, address });
+      setMarkedRegion((prevState) => ({
+        ...prevState,
+        latitude: lat,
+        longitude: lon,
+      }));
     } else {
       Alert.alert(
         "Erro ao contatar a API de Geocode:",
         "Não foi possível recuperar as coordenadas."
       );
     }
+  }
+
+  async function mapTravelHandler(lat, lon) {
+    return;
+  }
+
+  function markLocationHandler(event) {
+    const { latitude, longitude } = event.nativeEvent.coordinate;
+    return;
   }
 
   return (
@@ -50,21 +52,31 @@ export default function Location() {
           <MapView
             style={styles.map}
             showsUserLocation={true}
-            scrollEnabled={true}
+            scrollEnabled={false}
             zoomEnabled={true}
-            region={mockRegion}
-            onPress={selectLocationHandler}
+            region={markedRegion}
+            onPress={markLocationHandler}
           >
-            <Marker coordinate={markedLocation} />
+            <Marker
+              coordinate={{
+                latitude: markedRegion.latitude,
+                longitude: markedRegion.longitude,
+              }}
+            />
           </MapView>
         </View>
         <Input
           icon="location-outline"
           textInputConfig={{
             placeholder: "Endereço",
+            value: address,
+            onChangeText: (text) => setAddress(text),
           }}
         />
-        <Pressable style={styles.buttonContainer}>
+        <Pressable
+          style={styles.buttonContainer}
+          onPress={() => inputTravelHandler(address)}
+        >
           <Text style={styles.buttonText}>Ir</Text>
         </Pressable>
       </View>

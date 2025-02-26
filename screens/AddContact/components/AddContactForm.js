@@ -19,13 +19,18 @@ function AddContactForm({ navigation }) {
     phone: "",
     email: "",
     image: "",
+    location: {
+      lat: "",
+      lon: "",
+      address: "",
+    },
   });
 
   function InputHandler(field, value) {
-    setFields({
+    setFields((fields) => ({
       ...fields,
       [field]: value,
-    });
+    }));
   }
 
   async function SaveHandler() {
@@ -49,6 +54,10 @@ function AddContactForm({ navigation }) {
 
   function handleImagePicked(imageUri) {
     InputHandler("image", imageUri);
+  }
+
+  function handleLocationPicked(locationObject) {
+    InputHandler("location", locationObject);
   }
 
   return (
@@ -108,7 +117,9 @@ function AddContactForm({ navigation }) {
             value: fields.email,
           }}
         />
-        <Location />
+        <Location 
+          onLocationPicked={handleLocationPicked}
+        />
       </ScrollView>
       <Button title="Salvar" onPress={SaveHandler} />
     </>
