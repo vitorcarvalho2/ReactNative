@@ -3,8 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import styleColors from "../assets/static/colors";
-import { stylesHeaderText } from "../assets/static/styles";
 
+import CallContact from "./CallContact/CallContact";
 import MainPage from "./MainPage/MainPage";
 import AddContact from "./AddContact/AddContact";
 import EditContact from "./EditContact/EditContact";
@@ -40,6 +40,11 @@ export default function Navigation() {
                 options={() => ({
                   headerTitle: "Editar contato",
                 })}
+              />
+              <Stack.Screen
+                name="CallContact"
+                component={CallContact}
+                options={{ headerShown: false }}
               />
             </Stack.Navigator>
       </NavigationContainer>

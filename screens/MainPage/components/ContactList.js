@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import {
   StyleSheet,
-  Text,
-  Image,
   View,
   FlatList,
   Dimensions,
   Alert,
+  Pressable,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styleColors from "../../../assets/static/colors";
@@ -58,17 +57,26 @@ function ContactList({ navigation, query }) {
         data={contacts}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.contactCard}>
-            <InfoSection item={item}/>
-            <Icon
-              name="pencil-sharp"
-              size={deviceWidth >= 800 ? 45 : 30}
-              color={styleColors.primary100}
-              onPress={() =>
-                navigation.navigate("EditContact", { id: item.id })
-              }
-            />
-          </View>
+          <Pressable
+            onPress={() => navigation.navigate("EditContact", { id: item.id })}
+            style={({ pressed }) => [
+              {
+                opacity: pressed ? 0.5 : 1,
+              },
+            ]}
+          >
+            <View style={styles.contactCard}>
+              <InfoSection item={item} />
+              <Icon
+                name="call"
+                size={deviceWidth >= 800 ? 45 : 30}
+                color={styleColors.primary100}
+                onPress={() => {
+                  navigation.navigate("CallContact", { id: item.id });
+                }}
+              />
+            </View>
+          </Pressable>
         )}
       ></FlatList>
     </View>
