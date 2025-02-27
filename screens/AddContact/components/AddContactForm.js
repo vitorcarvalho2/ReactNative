@@ -66,11 +66,11 @@ function AddContactForm({ navigation }) {
         contentContainerStyle={{ alignItems: "center" }}
         style={styles.formContainer}
       >
-      <Camera
-        children={"Adicionar Foto"}
-        image={null}
-        onImagePicked={handleImagePicked}
-      />
+        <Camera
+          children={"Adicionar Foto"}
+          image={null}
+          onImagePicked={handleImagePicked}
+        />
         <Input
           icon="person-outline"
           errorMessage={errors.name}
@@ -117,9 +117,7 @@ function AddContactForm({ navigation }) {
             value: fields.email,
           }}
         />
-        <Location 
-          onLocationPicked={handleLocationPicked}
-        />
+        <Location onLocationPicked={handleLocationPicked} />
       </ScrollView>
       <Button title="Salvar" onPress={SaveHandler} />
     </>
@@ -131,7 +129,7 @@ export default AddContactForm;
 const styles = StyleSheet.create({
   formContainer: {
     width: "100%",
-	flexGrow: 1,
+    flexGrow: 1,
     height: "70%",
     marginVertical: 0,
   },

@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { useState, useContext, useEffect, useCallback } from "react";
 
 import Icon from "react-native-vector-icons/Ionicons";
@@ -8,6 +8,7 @@ import DeleteContact from "./DeleteContact";
 import Button from "../../../Components/Button";
 import Input from "../../../Components/Input";
 import Camera from "../../../Components/Camera";
+import Location from "../../../Components/Location";
 
 import { ContactContext } from "../../../store/context/contacts-context";
 import { validateFields } from "../../../utils/validation";
@@ -21,12 +22,15 @@ function EditContactForm({ navigation, selectedId }) {
     (contact) => contact.id === selectedId
   );
 
+  const { name, cellphone, phone, email, image, location } = contactData;
+
   const [fields, setFields] = useState({
-    name: contactData?.name,
-    cellphone: contactData?.cellphone,
-    phone: contactData?.phone,
-    email: contactData?.email,
-    image: contactData?.image,
+    name: name,
+    cellphone: cellphone,
+    phone: phone,
+    email: email,
+    image: image,
+    location: location,
   });
 
   function InputHandler(field, value) {
@@ -84,9 +88,16 @@ function EditContactForm({ navigation, selectedId }) {
     });
   }, []);
 
+  function handleLocationPicked(locationObject) {
+    InputHandler("location", locationObject);
+  }
+
   return (
     <>
-      <View style={styles.formContainer}>
+      <ScrollView
+        contentContainerStyle={{ alignItems: "center" }}
+        style={styles.formContainer}
+      >
         {isDeleteModalVisible && (
           <DeleteContact
             onClose={() => setDeleteModalVisible(false)}
@@ -144,7 +155,8 @@ function EditContactForm({ navigation, selectedId }) {
             value: fields.email,
           }}
         />
-      </View>
+        <Location onLocationPicked={handleLocationPicked} locationData={contactData?.location}/>
+      </ScrollView>
       <Button title="Salvar" onPress={SaveHandler} />
     </>
   );
@@ -155,7 +167,6 @@ export default EditContactForm;
 const styles = StyleSheet.create({
   formContainer: {
     width: "100%",
-    alignItems: "center",
     marginVertical: 50,
   },
 });

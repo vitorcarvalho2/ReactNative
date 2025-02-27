@@ -5,11 +5,11 @@ import styleColors from "../assets/static/colors";
 import MapView, { Marker } from "react-native-maps";
 import { getCoordinates } from "../utils/geocode";
 
-export default function Location({ onLocationPicked }) {
-  const [address, setAddress] = useState("");
+export default function Location({ onLocationPicked, locationData={address: "", lat: -23.5506507, lon: -46.6333824} }) {
+  const [location, setLocation] = useState(locationData);
   const [markedRegion, setMarkedRegion] = useState({
-    latitude: -23.5506507,
-    longitude: -46.6333824,
+    latitude: location.lat,
+    longitude: location.lon,
     latitudeDelta: 0.15,
     longitudeDelta: 0.1,
   });
@@ -69,13 +69,13 @@ export default function Location({ onLocationPicked }) {
           icon="location-outline"
           textInputConfig={{
             placeholder: "Endereço",
-            value: address,
-            onChangeText: (text) => setAddress(text),
+            value: location.address,
+            onChangeText: (text) => setLocation((prevState) => ({...prevState, address: text})),	
           }}
         />
         <Pressable
           style={styles.buttonContainer}
-          onPress={() => inputTravelHandler(address)}
+          onPress={() => inputTravelHandler(location.address)}
         >
           <Text style={styles.buttonText}>Ir</Text>
         </Pressable>
