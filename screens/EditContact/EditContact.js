@@ -1,5 +1,4 @@
 import { View, StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
 import styleColors from "../../assets/static/colors";
 import { useRoute } from "@react-navigation/native";
 
