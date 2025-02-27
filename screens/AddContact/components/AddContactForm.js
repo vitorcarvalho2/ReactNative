@@ -131,6 +131,5 @@ const styles = StyleSheet.create({
     width: "100%",
     flexGrow: 1,
     height: "70%",
-    marginVertical: 0,
   },
 });

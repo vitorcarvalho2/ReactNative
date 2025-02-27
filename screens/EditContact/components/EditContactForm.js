@@ -167,6 +167,8 @@ export default EditContactForm;
 const styles = StyleSheet.create({
   formContainer: {
     width: "100%",
-    marginVertical: 50,
+    flexGrow: 1,
+    height: "70%",
+    
   },
 });

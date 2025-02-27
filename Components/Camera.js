@@ -180,8 +180,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 5,
-    marginBottom: 25,
+    marginVertical: "10%",
   },
   addImageText: {
     color: styleColors.primary100,
