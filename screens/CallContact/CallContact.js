@@ -16,7 +16,12 @@ function CallContact() {
   const contactData = contactCtx.contacts.find(
     (contact) => contact.id === selectedId
   );
+
   const [pickedImage, setPickedImage] = useState(contactData.image || null);
+
+  const [isMuted, setIsMuted] = useState(false);
+  const [showKeyboard, setShowKeyboard] = useState(false);
+
 
   return (
     <View style={styles.container}>
@@ -43,8 +48,16 @@ function CallContact() {
         </View>
       </View>
 
-      {/* Container do botão de desligar */}
       <View style={styles.bottomContainer}>
+        <View style={styles.microphone}>
+          <Icon
+            name={isMuted ? "mic-off" : "mic"}
+            size={30}
+            color="white"
+            onPress={() => setIsMuted((prev) => !prev)} 
+          />
+        </View>
+
         <View style={styles.hangup}>
           <Icon
             name="call"
@@ -53,6 +66,15 @@ function CallContact() {
             onPress={() => {
               navigation.goBack();
             }}
+          />
+        </View>
+
+        <View style={styles.keyboard}>
+          <Icon
+            name="keypad"
+            size={30}
+            color="white"
+            onPress={() => setShowKeyboard((prev) => !prev)} 
           />
         </View>
       </View>
@@ -105,6 +127,8 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     position: "absolute",
+    flexDirection: "row",
+    justifyContent: "space-between",
     bottom: 0,
     width: "100%",
     height: "25%",
@@ -119,5 +143,24 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
+    margin: 20,
+  },
+  microphone: {
+    backgroundColor: styleColors.primary100,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 20,
+  },
+  keyboard: {
+    backgroundColor: styleColors.primary100,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 20,
   },
 });
