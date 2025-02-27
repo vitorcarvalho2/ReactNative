@@ -22,15 +22,13 @@ function EditContactForm({ navigation, selectedId }) {
     (contact) => contact.id === selectedId
   );
 
-  const { name, cellphone, phone, email, image, location } = contactData;
-
   const [fields, setFields] = useState({
-    name: name,
-    cellphone: cellphone,
-    phone: phone,
-    email: email,
-    image: image,
-    location: location,
+    name: contactData?.name,
+    cellphone: contactData?.cellphone,
+    phone: contactData?.phone,
+    email: contactData?.email,
+    image: contactData?.image,
+    location: contactData?.location,
   });
 
   function InputHandler(field, value) {

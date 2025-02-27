@@ -52,7 +52,7 @@ export default function Location({ onLocationPicked, locationData={address: "", 
           <MapView
             style={styles.map}
             showsUserLocation={true}
-            scrollEnabled={false}
+            scrollEnabled={true}
             zoomEnabled={true}
             region={markedRegion}
             onPress={markLocationHandler}
