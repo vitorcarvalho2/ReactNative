@@ -1,4 +1,11 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TextInput,
+  KeyboardAvoidingView,
+} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styleColors from "../../assets/static/colors";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -21,10 +28,10 @@ function CallContact() {
 
   const [isMuted, setIsMuted] = useState(false);
   const [showKeyboard, setShowKeyboard] = useState(false);
-
+  const [keyboardText, setKeyboardText] = useState("");
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <Text style={styles.title}>Ligando...</Text>
 
       {pickedImage ? (
@@ -47,38 +54,50 @@ function CallContact() {
           <Text style={styles.cellphone}> {contactData.cellphone}</Text>
         </View>
       </View>
-
       <View style={styles.bottomContainer}>
-        <View style={styles.microphone}>
-          <Icon
-            name={isMuted ? "mic-off" : "mic"}
-            size={30}
-            color="white"
-            onPress={() => setIsMuted((prev) => !prev)} 
-          />
-        </View>
+        {showKeyboard && (
+          <KeyboardAvoidingView style={styles.TextContainer}>
+            <TextInput
+              style={styles.Text}
+              value={keyboardText}
+              onChangeText={setKeyboardText}
+              keyboardType="numeric"
+              autoFocus={true}
+            />
+          </KeyboardAvoidingView>
+        )}
+        <View style={styles.buttonsContainer}>
+          <View style={isMuted ? styles.muted : styles.microphone}>
+            <Icon
+              name={isMuted ? "mic-off" : "mic"}
+              size={30}
+              color="white"
+              onPress={() => setIsMuted((prev) => !prev)}
+            />
+          </View>
 
-        <View style={styles.hangup}>
-          <Icon
-            name="call"
-            size={30}
-            color="white"
-            onPress={() => {
-              navigation.goBack();
-            }}
-          />
-        </View>
+          <View style={styles.hangup}>
+            <Icon
+              name="call"
+              size={30}
+              color="white"
+              onPress={() => {
+                navigation.goBack();
+              }}
+            />
+          </View>
 
-        <View style={styles.keyboard}>
-          <Icon
-            name="keypad"
-            size={30}
-            color="white"
-            onPress={() => setShowKeyboard((prev) => !prev)} 
-          />
+          <View style={styles.keyboard}>
+            <Icon
+              name="keypad"
+              size={30}
+              color="white"
+              onPress={() => setShowKeyboard((prev) => !prev)}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -127,14 +146,29 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     position: "absolute",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: "column",
     bottom: 0,
     width: "100%",
     height: "25%",
     backgroundColor: styleColors.secondary400,
     alignItems: "center",
     justifyContent: "center",
+  },
+  TextContainer: {
+    borderBottomWidth: 2,
+    borderColor: styleColors.primary100,
+    width: "100%",
+    alignItems: "center",
+    backgroundColor: styleColors.secondary400,
+    justifyContent: "center",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+  },
+  Text: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: styleColors.primary100,
   },
   hangup: {
     backgroundColor: styleColors.error,
@@ -147,6 +181,15 @@ const styles = StyleSheet.create({
   },
   microphone: {
     backgroundColor: styleColors.primary100,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 20,
+  },
+  muted: {
+    backgroundColor: styleColors.primary200,
     width: 60,
     height: 60,
     borderRadius: 30,
